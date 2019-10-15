@@ -5,9 +5,11 @@ const AutoSuggest = ({ items }) => {
 
     const [text, setText] = useState("");
     const [filtered, setFiltered] = useState([]);
+    const [clearItems, setClearItems] = useState(false);
 
     const _onClick = () => {
         setText(filtered && filtered.length ? filtered[0] : "");
+        setClearItems(filtered && filtered.length && filtered[0]);
     }
 
     const renderItems = () => {
@@ -15,6 +17,7 @@ const AutoSuggest = ({ items }) => {
     }
 
     const onChange = e => {
+        setClearItems(false);
         setText(e.target.value);
 
         //Filter item
@@ -25,6 +28,7 @@ const AutoSuggest = ({ items }) => {
         });
 
         setFiltered(itemFilter);
+
 
     }
 
@@ -44,9 +48,9 @@ const AutoSuggest = ({ items }) => {
 
             <div>
                 <ul className="list">
-                    {text && text.length ?
+                    {!clearItems ? text && text.length ?
                         filtered.map((f, index) => <li onClick={_onClick} key={index} style={{ backgroundColor: "#DCDCDC", marginBottom: "3px", padding: "5px" }}>{f}</li>)
-                        : renderItems()}
+                        : renderItems() : ""}
                 </ul>
             </div>
         </div>

@@ -37,6 +37,12 @@ const FormList = () => {
       //   axios.post('https://sample.com/auth', body, config);
 
       console.log(body);
+
+      setData({
+        name: '',
+        family: '',
+        city: ''
+      });
     } else {
       // setAlert
     }

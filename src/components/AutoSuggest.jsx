@@ -1,9 +1,15 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
-const AutoSuggest = ({ items, name, onSelect }) => {
+const AutoSuggest = ({ items, name, onSelect, value }) => {
   const [text, setText] = useState('');
   const [filtered, setFiltered] = useState([]);
   const [clearItems, setClearItems] = useState(false);
+
+  useEffect(() => {
+    if (value === '') {
+      setText('');
+    }
+  }, [value]);
 
   const _onClick = () => {
     setText(filtered && filtered.length ? filtered[0] : '');
